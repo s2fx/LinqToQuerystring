@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21126.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F5C6F2FB-E3FC-4787-B637-FC4AE2F70050}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,13 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F5C6F2
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2313C896-8F93-46A4-9A5A-B148146256F3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToQuerystring.WebApi2", "LinqToQuerystring.WebApi\LinqToQuerystring.WebApi2.csproj", "{C2EBA6BA-11AD-4AF7-B935-B71B761A63FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToQuerystring.IntegrationTests.WebApi2", "LinqToQuerystring.IntegrationTests.WebAPI\LinqToQuerystring.IntegrationTests.WebApi2.csproj", "{6892C887-A339-4F81-93F2-FFEF64DCE7BE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToQuerystring", "LinqToQuerystring\LinqToQuerystring.csproj", "{7859C906-95D8-4322-AA44-BC854B065AEE}"
+EndProject
+Project("{FF286327-C783-4F7A-AB73-9BCBAD0D4460}") = "LinqToQueryStringNuget", "LinqToQueryStringNuget\LinqToQueryStringNuget.nuproj", "{C082780D-2D3E-46F1-9925-7FFF3B3F2E54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,19 +26,16 @@ Global
 		{C2EBA6BA-11AD-4AF7-B935-B71B761A63FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2EBA6BA-11AD-4AF7-B935-B71B761A63FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2EBA6BA-11AD-4AF7-B935-B71B761A63FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6892C887-A339-4F81-93F2-FFEF64DCE7BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6892C887-A339-4F81-93F2-FFEF64DCE7BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6892C887-A339-4F81-93F2-FFEF64DCE7BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6892C887-A339-4F81-93F2-FFEF64DCE7BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7859C906-95D8-4322-AA44-BC854B065AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7859C906-95D8-4322-AA44-BC854B065AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7859C906-95D8-4322-AA44-BC854B065AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7859C906-95D8-4322-AA44-BC854B065AEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C082780D-2D3E-46F1-9925-7FFF3B3F2E54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C082780D-2D3E-46F1-9925-7FFF3B3F2E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C082780D-2D3E-46F1-9925-7FFF3B3F2E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C082780D-2D3E-46F1-9925-7FFF3B3F2E54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{6892C887-A339-4F81-93F2-FFEF64DCE7BE} = {2313C896-8F93-46A4-9A5A-B148146256F3}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,1 @@
+﻿This is the Nuget package for NerdCats fork of LinqToQuerystring.
