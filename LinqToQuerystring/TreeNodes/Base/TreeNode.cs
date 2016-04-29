@@ -59,6 +59,11 @@
 
         public abstract Expression BuildLinqExpression(
             IQueryable query, Expression expression, Expression item = null);
+        public virtual Expression BuildLinqExpressionWithComparison(
+           IQueryable query, Expression expression, Expression item = null, Expression compareExpression = null)
+        {
+            return BuildLinqExpression(query, expression, item);
+        }
 
         public virtual int CompareTo(TreeNode other)
         {
@@ -119,6 +124,9 @@
             if (!type.IsAssignableFrom(expression.Type))
             {
                 var convertToType = Configuration.TypeConversionMap(expression.Type, type);
+                if (convertToType.IsEnum && expression.Type == typeof(string))
+                {
+                }
                 converted = Expression.Convert(expression, convertToType);
             }
 

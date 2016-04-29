@@ -7,7 +7,7 @@
     using Antlr.Runtime;
 
     using LinqToQuerystring.TreeNodes.Base;
-
+    using DataTypes;
     public class EqualsNode : TwoChildNode
     {
         public EqualsNode(Type inputType, IToken payload, TreeNodeFactory treeNodeFactory)
@@ -18,7 +18,7 @@
         public override Expression BuildLinqExpression(IQueryable query, Expression expression, Expression item = null)
         {
             var leftExpression = this.LeftNode.BuildLinqExpression(query, expression, item);
-            var rightExpression = this.RightNode.BuildLinqExpression(query, expression, item);
+            var rightExpression = this.RightNode.BuildLinqExpressionWithComparison(query, expression, item, leftExpression);
 
             // Nasty workaround to avoid comparison of Aggregate functions to true or false which breaks Entity framework
             if (leftExpression.Type == typeof(bool) && rightExpression.Type == typeof(bool) && rightExpression is ConstantExpression)
@@ -29,6 +29,12 @@
                 }
 
                 return Expression.Not(leftExpression);
+            }
+            
+            if(leftExpression.Type.IsEnum && rightExpression.Type == typeof(string))
+            {
+                Type type = leftExpression.GetType();
+                
             }
 
             if (rightExpression.Type == typeof(bool) && leftExpression.Type == typeof(bool)

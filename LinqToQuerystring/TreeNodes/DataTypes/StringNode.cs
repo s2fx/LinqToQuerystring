@@ -17,6 +17,13 @@
 
         public override Expression BuildLinqExpression(IQueryable query, Expression expression, Expression item = null)
         {
+            string text = ExtractText();
+
+            return Expression.Constant(text);
+        }
+
+        private string ExtractText()
+        {
             var text = this.Text.Trim('\'');
             text = text.Replace(@"\\", @"\");
             text = text.Replace(@"\b", "\b");
@@ -26,8 +33,18 @@
             text = text.Replace(@"\r", "\r");
             text = text.Replace(@"\'", "'");
             text = text.Replace(@"''", "'");
+            return text;
+        }
 
-            return Expression.Constant(text);
+        public override Expression BuildLinqExpressionWithComparison(IQueryable query, Expression expression, Expression item = null, Expression compareExpression = null)
+        {
+            if (compareExpression.Type.IsEnum)
+            {
+                Type enumType = compareExpression.Type;
+                var enumValue = Convert.ChangeType(Enum.Parse(enumType, ExtractText(), true), enumType);
+                return Expression.Constant(enumValue);
+            }
+            return base.BuildLinqExpressionWithComparison(query, expression, item, compareExpression);
         }
     }
 }
