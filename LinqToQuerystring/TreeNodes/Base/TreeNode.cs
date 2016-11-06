@@ -59,8 +59,8 @@
 
         public abstract Expression BuildLinqExpression(
             IQueryable query, Expression expression, Expression item = null);
-        public virtual Expression BuildLinqExpressionWithComparison(
-           IQueryable query, Expression expression, Expression item = null, Expression compareExpression = null)
+
+        public virtual Expression BuildLinqExpressionWithComparison( IQueryable query, Expression expression, Expression item = null, Expression compareExpression = null)
         {
             return BuildLinqExpression(query, expression, item);
         }
