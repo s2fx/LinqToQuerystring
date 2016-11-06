@@ -21,7 +21,7 @@ build:
 test: off
 deploy_script:
   - cmd: nuget pack LinqToQuerystring.WebApi/LinqToQuerystring.WebAPI2.nuspec -Version %appveyor_build_version%
-  - cmd: nuget push LinqToQuerystring.WebApi.%appveyor_build_version%.nupkg welovecats -Source http://nerdcatsnugetserver.azurewebsites.net/api/v2/package -verbosity detailed
+  - cmd: nuget push LinqToQuerystring.WebApi2.%appveyor_build_version%.nupkg welovecats -Source http://nerdcatsnugetserver.azurewebsites.net/api/v2/package -verbosity detailed
 notifications:
 - provider: Slack
   incoming_webhook: https://hooks.slack.com/services/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
