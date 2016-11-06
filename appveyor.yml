@@ -14,11 +14,14 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 before_build:
-    - cmd: nuget restore LinqToQuerystring.Core.sln
+    - cmd: nuget restore LinqToQuerystring.WebApi2.sln
 build:
-  project: LinqToQuerystring.Core.sln
+  project: LinqToQuerystring.WebApi2.sln
   verbosity: minimal
 test: off
+deploy_script:
+  - cmd: nuget pack LinqToQuerystring.WebApi/LinqToQuerystring.WebAPI2.nuspec -Version %appveyor_build_version%
+  - cmd: nuget push LinqToQuerystring.WebApi.%appveyor_build_version%.nupkg welovecats -Source http://nerdcatsnugetserver.azurewebsites.net/api/v2/package -verbosity detailed
 notifications:
 - provider: Slack
   incoming_webhook: https://hooks.slack.com/services/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
