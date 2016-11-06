@@ -18,6 +18,7 @@ before_build:
 build:
   project: LinqToQuerystring.Core.sln
   verbosity: minimal
+test: off
 notifications:
 - provider: Slack
   incoming_webhook: https://hooks.slack.com/services/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
