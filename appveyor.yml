@@ -14,9 +14,9 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 before_build:
-    - cmd: nuget restore LinqToQuerystring.WebApi2.sln
+    - cmd: nuget restore LinqToQuerystring.Core.sln
 build:
-  project: LinqToQuerystring.WebApi2.sln
+  project: LinqToQuerystring.Core.sln
   verbosity: minimal
 notifications:
 - provider: Slack
