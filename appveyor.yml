@@ -4,6 +4,10 @@ pull_requests:
 branches:
   only:
   - master
+environment:
+  matrix:
+  - solution_name: LinqToQuerystring.Core.sln
+  - solution_name: LinqToQuerystring.WebApi2.sln
 configuration: Release
 platform: Any CPU
 clone_depth: 10
@@ -14,10 +18,9 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 before_build:
-    - cmd: nuget restore LinqToQuerystring.WebApi2.sln
-build:
-  project: LinqToQuerystring.WebApi2.sln
-  verbosity: minimal
+  - cmd: nuget restore LinqToQuerystring.WebApi2.sln
+build_script:
+  - cmd: msbuild %solution_name%
 test: off
 deploy_script:
   - cmd: nuget pack LinqToQuerystring.WebApi/LinqToQuerystring.WebAPI2.nuspec -Version %appveyor_build_version%
