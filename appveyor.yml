@@ -25,7 +25,7 @@ build_script:
   - cmd: msbuild %solution_name%.sln
 test: off
 deploy_script:
-  - cmd: nuget pack nuspec_path -Version %appveyor_build_version%
+  - cmd: nuget pack %nuspec_path% -Version %appveyor_build_version%
   - cmd: nuget push %solution_name%.%appveyor_build_version%.nupkg welovecats -Source http://nerdcatsnugetserver.azurewebsites.net/api/v2/package -verbosity detailed
 notifications:
 - provider: Slack
