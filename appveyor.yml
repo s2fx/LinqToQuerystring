@@ -10,7 +10,6 @@ environment:
     nuspec_path: LinqToQuerystring/LinqToQuerystring.nuspec
   - solution_name: LinqToQuerystring.WebApi2
     nuspec_path: LinqToQuerystring.WebApi/LinqToQuerystring.WebAPI2.nuspec
-    nuspec_path: 
 configuration: Release
 platform: Any CPU
 clone_depth: 10
