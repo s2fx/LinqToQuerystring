@@ -8,8 +8,10 @@ environment:
   matrix:
   - solution_name: LinqToQuerystring.Core
     nuspec_path: LinqToQuerystring/LinqToQuerystring.nuspec
+    nupkgName: LinqToQuerystring
   - solution_name: LinqToQuerystring.WebApi2
     nuspec_path: LinqToQuerystring.WebApi/LinqToQuerystring.WebAPI2.nuspec
+    nupkgName: LinqToQuerystring.WebApi2
 configuration: Release
 platform: Any CPU
 clone_depth: 10
@@ -26,7 +28,7 @@ build_script:
 test: off
 deploy_script:
   - cmd: nuget pack %nuspec_path% -Version %appveyor_build_version%
-  - cmd: nuget push %solution_name%.%appveyor_build_version%.nupkg welovecats -Source http://nerdcatsnugetserver.azurewebsites.net/api/v2/package -verbosity detailed
+  - cmd: nuget push %nupkgName%.%appveyor_build_version%.nupkg welovecats -Source http://nerdcatsnugetserver.azurewebsites.net/api/v2/package -verbosity detailed
 notifications:
 - provider: Slack
   incoming_webhook: https://hooks.slack.com/services/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
