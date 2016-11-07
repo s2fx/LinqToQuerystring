@@ -1,4 +1,4 @@
-version: 1.0.{build}
+version: 1.0.0.{build}
 pull_requests:
   do_not_increment_build_number: true
 branches:
@@ -6,9 +6,6 @@ branches:
   - master
 environment:
   matrix:
-  - solution_name: LinqToQuerystring.Core
-    nuspec_path: LinqToQuerystring/LinqToQuerystring.nuspec
-    nupkgName: LinqToQuerystring
   - solution_name: LinqToQuerystring.WebApi2
     nuspec_path: LinqToQuerystring.WebApi/LinqToQuerystring.WebAPI2.nuspec
     nupkgName: LinqToQuerystring.WebApi2

@@ -1,0 +1,35 @@
+version: 0.7.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+branches:
+  only:
+  - master
+environment:
+  matrix:
+  - solution_name: LinqToQuerystring.Core
+    nuspec_path: LinqToQuerystring/LinqToQuerystring.nuspec
+    nupkgName: LinqToQuerystring
+configuration: Release
+platform: Any CPU
+clone_depth: 10
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+before_build:
+  - cmd: nuget restore %solution_name%.sln
+build_script:
+  - cmd: msbuild %solution_name%.sln
+test: off
+deploy_script:
+  - cmd: nuget pack %nuspec_path% -Version %appveyor_build_version%
+  - cmd: nuget push %nupkgName%.%appveyor_build_version%.nupkg welovecats -Source http://nerdcatsnugetserver.azurewebsites.net/api/v2/package -verbosity detailed
+notifications:
+- provider: Slack
+  incoming_webhook: https://hooks.slack.com/services/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
+  channel: '#builds'
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
