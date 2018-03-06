@@ -1,35 +1,4 @@
 #################
-## Eclipse
-#################
-
-*.pydevproject
-.project
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
-
-# External tool builders
-.externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# CDT-specific
-.cproject
-
-# PDT-specific
-.buildpath
-
-
-#################
 ## Visual Studio
 #################
 
@@ -129,29 +98,6 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
-
-#############
-## Python
-#############
-
-*.py[co]
-
-# Packages
-*.egg
-*.egg-info
-dist
-build
-eggs
-parts
-bin
-var
-sdist
-develop-eggs
-.installed.cfg
-
-# Installer logs
-pip-log.txt
-
 # Unit test / coverage reports
 .coverage
 .tox
@@ -166,3 +112,4 @@ pip-log.txt
 .DS_Store
 NuGetPackage/
 *.userprefs
+.vscode
