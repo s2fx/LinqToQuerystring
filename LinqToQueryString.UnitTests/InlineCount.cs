@@ -5,7 +5,7 @@
 
     using LinqToQueryString.Tests;
 
-    using LinqToQuerystring;
+    using LinqToQuerystring.Core;
 
     using Machine.Specifications;
 

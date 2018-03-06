@@ -5,6 +5,7 @@
     using System.Linq;
 
     using LinqToQuerystring;
+    using LinqToQuerystring.Core;
 
     using Machine.Specifications;
 

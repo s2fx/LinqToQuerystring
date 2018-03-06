@@ -4,6 +4,7 @@
     using System.Linq;
 
     using LinqToQuerystring;
+    using LinqToQuerystring.Core;
     using LinqToQuerystring.Exceptions;
 
     using Machine.Specifications;
