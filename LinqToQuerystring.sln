@@ -9,13 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToQueryString.UnitTests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToQueryString.Tests", "LinqToQueryString.Tests\LinqToQueryString.Tests.csproj", "{139B0E4C-BC18-4180-8863-FB248CFDA42E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToQuerystring.Nancy", "LinqToQuerystring.Nancy\LinqToQuerystring.Nancy.csproj", "{60E15FF4-5729-4B80-B30A-E5BA395BD039}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2313C896-8F93-46A4-9A5A-B148146256F3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToQuerystring.EntityFramework", "LinqToQuerystring.EntityFramework\LinqToQuerystring.EntityFramework.csproj", "{854FA068-FF2B-49E3-A632-D0ADEA6264E6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToQuerystring.WebApi2", "LinqToQuerystring.WebApi\LinqToQuerystring.WebApi2.csproj", "{C2EBA6BA-11AD-4AF7-B935-B71B761A63FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,18 +29,6 @@ Global
 		{139B0E4C-BC18-4180-8863-FB248CFDA42E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{139B0E4C-BC18-4180-8863-FB248CFDA42E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{139B0E4C-BC18-4180-8863-FB248CFDA42E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60E15FF4-5729-4B80-B30A-E5BA395BD039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60E15FF4-5729-4B80-B30A-E5BA395BD039}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60E15FF4-5729-4B80-B30A-E5BA395BD039}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60E15FF4-5729-4B80-B30A-E5BA395BD039}.Release|Any CPU.Build.0 = Release|Any CPU
-		{854FA068-FF2B-49E3-A632-D0ADEA6264E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{854FA068-FF2B-49E3-A632-D0ADEA6264E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{854FA068-FF2B-49E3-A632-D0ADEA6264E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{854FA068-FF2B-49E3-A632-D0ADEA6264E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2EBA6BA-11AD-4AF7-B935-B71B761A63FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2EBA6BA-11AD-4AF7-B935-B71B761A63FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2EBA6BA-11AD-4AF7-B935-B71B761A63FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2EBA6BA-11AD-4AF7-B935-B71B761A63FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
