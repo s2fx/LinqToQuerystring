@@ -15,8 +15,11 @@
 
         private readonly bool forceDynamicProperties;
 
-        public TreeNodeFactory(Type inputType, bool forceDynamicProperties)
+        public Context Context { get; }
+
+        public TreeNodeFactory(Type inputType, Context context, bool forceDynamicProperties)
         {
+            this.Context = context;
             this.inputType = inputType;
             this.forceDynamicProperties = forceDynamicProperties;
         }

@@ -16,6 +16,8 @@
 
         protected internal readonly TreeNodeFactory factory;
 
+        protected internal Context Context => this.factory.Context;
+
         protected TreeNode(Type inputType, IToken payload, TreeNodeFactory treeNodeFactory)
             : base(payload)
         {
@@ -60,7 +62,7 @@
         public abstract Expression BuildLinqExpression(
             IQueryable query, Expression expression, Expression item = null);
 
-        public virtual Expression BuildLinqExpressionWithComparison( IQueryable query, Expression expression, Expression item = null, Expression compareExpression = null)
+        public virtual Expression BuildLinqExpressionWithComparison(IQueryable query, Expression expression, Expression item = null, Expression compareExpression = null)
         {
             return BuildLinqExpression(query, expression, item);
         }
@@ -70,7 +72,7 @@
             return 0;
         }
 
-        protected static void NormalizeTypes(ref Expression leftSide, ref Expression rightSide)
+        protected void NormalizeTypes(ref Expression leftSide, ref Expression rightSide)
         {
             var rightSideIsConstant = rightSide is ConstantExpression;
             var leftSideIsConstant = leftSide is ConstantExpression;
@@ -107,9 +109,9 @@
             }
         }
 
-        private static Expression MapAndCast(Expression from, Expression to)
+        private Expression MapAndCast(Expression from, Expression to)
         {
-            var mapped = Configuration.TypeConversionMap(from.Type, to.Type);
+            var mapped = Context.TypeConversionMap(from.Type, to.Type);
             if (mapped != from.Type)
             {
                 from = CastIfNeeded(from, mapped);
@@ -118,12 +120,12 @@
             return CastIfNeeded(from, to.Type);
         }
 
-        protected static Expression CastIfNeeded(Expression expression, Type type)
+        protected Expression CastIfNeeded(Expression expression, Type type)
         {
             var converted = expression;
             if (!type.IsAssignableFrom(expression.Type))
             {
-                var convertToType = Configuration.TypeConversionMap(expression.Type, type);
+                var convertToType = Context.TypeConversionMap(expression.Type, type);
                 if (convertToType.IsEnum && expression.Type == typeof(string))
                 {
                 }
