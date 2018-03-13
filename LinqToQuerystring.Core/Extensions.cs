@@ -14,17 +14,29 @@
 
     public static class Extensions
     {
-        public static TResult LinqToQuerystring<T, TResult>(this IQueryable<T> query, string queryString = "", bool forceDynamicProperties = false, int maxPageSize = -1)
+        public static TResult LinqToQuerystring<T, TResult>(
+            this IQueryable<T> query, string queryString = "", bool forceDynamicProperties = false, int maxPageSize = -1) =>
+            (TResult)query.LinqToQuerystring(typeof(T), Context.GlobalContext, queryString, forceDynamicProperties, maxPageSize);
+
+        public static IQueryable<T> LinqToQuerystring<T>(
+            this IQueryable<T> query, string queryString = "", bool forceDynamicProperties = false, int maxPageSize = -1) =>
+            (IQueryable<T>)query.LinqToQuerystring(typeof(T), Context.GlobalContext, queryString, forceDynamicProperties, maxPageSize);
+
+        public static object LinqToQuerystring(
+            this IQueryable query, Type inputType, string queryString = "", bool forceDynamicProperties = false, int maxPageSize = -1) =>
+            query.LinqToQuerystring(inputType, Context.GlobalContext, queryString, forceDynamicProperties, maxPageSize);
+
+        public static TResult LinqToQuerystring<T, TResult>(this IQueryable<T> query, Context context, string queryString = "", bool forceDynamicProperties = false, int maxPageSize = -1)
         {
-            return (TResult)LinqToQuerystring(query, typeof(T), queryString, forceDynamicProperties, maxPageSize);
+            return (TResult)LinqToQuerystring(query, typeof(T), context, queryString, forceDynamicProperties, maxPageSize);
         }
 
-        public static IQueryable<T> LinqToQuerystring<T>(this IQueryable<T> query, string queryString = "", bool forceDynamicProperties = false, int maxPageSize = -1)
+        public static IQueryable<T> LinqToQuerystring<T>(this IQueryable<T> query, Context context, string queryString = "", bool forceDynamicProperties = false, int maxPageSize = -1)
         {
-            return (IQueryable<T>)LinqToQuerystring(query, typeof(T), queryString, forceDynamicProperties, maxPageSize);
+            return (IQueryable<T>)LinqToQuerystring(query, typeof(T), context, queryString, forceDynamicProperties, maxPageSize);
         }
 
-        public static object LinqToQuerystring(this IQueryable query, Type inputType, string queryString = "", bool forceDynamicProperties = false, int maxPageSize = -1)
+        public static object LinqToQuerystring(this IQueryable query, Type inputType, Context context, string queryString = "", bool forceDynamicProperties = false, int maxPageSize = -1)
         {
             var queryResult = query;
             var constrainedQuery = query;
@@ -69,7 +81,7 @@
             var lexer = new LinqToQuerystringLexer(input);
             var tokStream = new CommonTokenStream(lexer);
 
-            var parser = new LinqToQuerystringParser(tokStream) { TreeAdaptor = new TreeNodeFactory(inputType, forceDynamicProperties) };
+            var parser = new LinqToQuerystringParser(tokStream) { TreeAdaptor = new TreeNodeFactory(inputType, context, forceDynamicProperties) };
 
             var result = parser.prog();
 
@@ -78,7 +90,7 @@
             {
                 if (!(singleNode is SelectNode) && !(singleNode is InlineCountNode))
                 {
-                    BuildQuery(singleNode, ref queryResult, ref constrainedQuery);
+                    BuildQuery(singleNode, ref queryResult, ref constrainedQuery, context);
                     return constrainedQuery;
                 }
 
@@ -99,7 +111,7 @@
                 // These should always come first
                 foreach (var node in children.Where(o => !(o is SelectNode) && !(o is InlineCountNode)))
                 {
-                    BuildQuery(node, ref queryResult, ref constrainedQuery);
+                    BuildQuery(node, ref queryResult, ref constrainedQuery, context);
                 }
 
                 var selectNode = children.FirstOrDefault(o => o is SelectNode);
@@ -118,12 +130,12 @@
             return constrainedQuery;
         }
 
-        private static void BuildQuery(TreeNode node, ref IQueryable queryResult, ref IQueryable constrainedQuery)
+        private static void BuildQuery(TreeNode node, ref IQueryable queryResult, ref IQueryable constrainedQuery, Context context)
         {
             var type = queryResult.Provider.GetType().Name;
 
-            var mappings = (!string.IsNullOrEmpty(type) && Configuration.CustomNodes.ContainsKey(type))
-                               ? Configuration.CustomNodes[type]
+            var mappings = (!string.IsNullOrEmpty(type) && context.CustomNodes.ContainsKey(type))
+                               ? context.CustomNodes[type]
                                : null;
 
             if (mappings != null)
