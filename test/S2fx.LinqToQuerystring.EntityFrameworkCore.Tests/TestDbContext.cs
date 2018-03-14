@@ -24,6 +24,9 @@
         {
             modelBuilder.Entity<ConcreteClass>(entity =>
             {
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Value).IsRequired();
+                entity.Property(x => x.Cost).IsRequired();
                 entity.Ignore(x => x.StringCollection);
             });
 
