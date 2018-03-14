@@ -13,7 +13,7 @@
     {
         private static Exception ex;
 
-        private Because of = () => ex = Catch.Exception(() => result = testDb.ConcreteCollection.LinqToQuerystring("?$skip=1").ToList());
+        private Because of = () => ex = Catch.Exception(() => result = testDb.ConcreteClasses.LinqToQuerystring("?$skip=1").ToList());
 
         private It should_throw_an_exception = () => ex.ShouldBeOfExactType<NotSupportedException>();
     }
@@ -22,7 +22,7 @@
     {
         private static Exception ex;
 
-        private Because of = () => ex = Catch.Exception(() => complexResult = testDb.ComplexCollection.LinqToQuerystring("?$orderby=concrete").ToList());
+        private Because of = () => ex = Catch.Exception(() => complexResult = testDb.ComplexClasses.LinqToQuerystring("?$orderby=concrete").ToList());
 
         private It should_throw_an_exception = () => ex.ShouldBeOfExactType<ArgumentException>();
     }

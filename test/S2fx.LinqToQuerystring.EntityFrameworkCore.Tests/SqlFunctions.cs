@@ -23,23 +23,23 @@
         {
             testDb = new TestDbContext();
 
-            testDb.Database.ExecuteSqlCommand("UPDATE ComplexClasses SET Concrete_Id = NULL");
+            testDb.Database.ExecuteSqlCommand("UPDATE ComplexClasses SET ConcreteId = NULL");
             testDb.Database.ExecuteSqlCommand("DELETE FROM EdgeCaseClasses");
             testDb.Database.ExecuteSqlCommand("DELETE FROM ConcreteClasses");
             testDb.Database.ExecuteSqlCommand("DELETE FROM ComplexClasses");
 
-            testDb.ConcreteCollection.Add(
+            testDb.ConcreteClasses.Add(
                 InstanceBuilders.BuildConcrete("Saturday", 1, new DateTime(2001, 01, 01), true));
-            testDb.ConcreteCollection.Add(InstanceBuilders.BuildConcrete("Satnav", 2, new DateTime(2002, 01, 01), false));
-            testDb.ConcreteCollection.Add(InstanceBuilders.BuildConcrete("Saturnalia", 3, new DateTime(2003, 01, 01), true));
-            testDb.ConcreteCollection.Add(InstanceBuilders.BuildConcrete("Saturn", 4, new DateTime(2004, 01, 01), true));
-            testDb.ConcreteCollection.Add(InstanceBuilders.BuildConcrete("Monday", 5, new DateTime(2005, 01, 01), true));
-            testDb.ConcreteCollection.Add(InstanceBuilders.BuildConcrete("Tuesday", 5, new DateTime(2005, 01, 01), true));
-            testDb.ConcreteCollection.Add(InstanceBuilders.BuildConcrete("Burns", 5, new DateTime(2005, 01, 01), true));
+            testDb.ConcreteClasses.Add(InstanceBuilders.BuildConcrete("Satnav", 2, new DateTime(2002, 01, 01), false));
+            testDb.ConcreteClasses.Add(InstanceBuilders.BuildConcrete("Saturnalia", 3, new DateTime(2003, 01, 01), true));
+            testDb.ConcreteClasses.Add(InstanceBuilders.BuildConcrete("Saturn", 4, new DateTime(2004, 01, 01), true));
+            testDb.ConcreteClasses.Add(InstanceBuilders.BuildConcrete("Monday", 5, new DateTime(2005, 01, 01), true));
+            testDb.ConcreteClasses.Add(InstanceBuilders.BuildConcrete("Tuesday", 5, new DateTime(2005, 01, 01), true));
+            testDb.ConcreteClasses.Add(InstanceBuilders.BuildConcrete("Burns", 5, new DateTime(2005, 01, 01), true));
 
             testDb.SaveChanges();
 
-            concreteCollection = testDb.ConcreteCollection.ToList();
+            concreteCollection = testDb.ConcreteClasses.ToList();
 
             testDb = new TestDbContext();
         };
@@ -48,7 +48,7 @@
     public class When_filtering_on_startswith_function : SqlFunctions
     {
         private Because of =
-            () => result = testDb.ConcreteCollection.LinqToQuerystring("?$filter=startswith(Name,'Sat')").ToList();
+            () => result = testDb.ConcreteClasses.LinqToQuerystring("?$filter=startswith(Name,'Sat')").ToList();
 
         private It should_return_four_records = () => result.Count().ShouldEqual(4);
 
@@ -59,7 +59,7 @@
     public class When_filtering_on_substringof_function : SqlFunctions
     {
         private Because of =
-            () => result = testDb.ConcreteCollection.LinqToQuerystring("?$filter=substringof('urn',Name)").ToList();
+            () => result = testDb.ConcreteClasses.LinqToQuerystring("?$filter=substringof('urn',Name)").ToList();
 
         private It should_return_three_records = () => result.Count().ShouldEqual(3);
 
@@ -72,7 +72,7 @@
         private Because of =
             () =>
             result =
-            testDb.ConcreteCollection.LinqToQuerystring(
+            testDb.ConcreteClasses.LinqToQuerystring(
                 "?$filter=(substringof('Mond',Name)) or (substringof('Tues',Name))").ToList();
 
         private It should_return_three_records = () => result.Count().ShouldEqual(2);
@@ -84,7 +84,7 @@
     public class When_filtering_on_substringof_function_with_escape_character : SqlFiltering
     {
         private Because of =
-            () => edgeCaseResult = testDb.EdgeCaseCollection.LinqToQuerystring(@"?$filter=substringof('\\',Name)").ToList();
+            () => edgeCaseResult = testDb.EdgeCaseClasses.LinqToQuerystring(@"?$filter=substringof('\\',Name)").ToList();
 
         private It should_return_one_record = () => edgeCaseResult.Count().ShouldEqual(1);
 
@@ -95,7 +95,7 @@
     public class When_filtering_on_substringof_function_with_tolower : SqlFunctions
     {
         private Because of =
-            () => result = testDb.ConcreteCollection.LinqToQuerystring(@"?$filter=substringof('sat',tolower(Name))").ToList();
+            () => result = testDb.ConcreteClasses.LinqToQuerystring(@"?$filter=substringof('sat',tolower(Name))").ToList();
 
         private It should_return_four_records = () => result.Count().ShouldEqual(4);
 
@@ -106,7 +106,7 @@
     public class When_filtering_on_substringof_function_with_toupper : SqlFunctions
     {
         private Because of =
-            () => result = testDb.ConcreteCollection.LinqToQuerystring(@"?$filter=substringof('SAT',toupper(Name))").ToList();
+            () => result = testDb.ConcreteClasses.LinqToQuerystring(@"?$filter=substringof('SAT',toupper(Name))").ToList();
 
         private It should_return_four_records = () => result.Count().ShouldEqual(4);
 

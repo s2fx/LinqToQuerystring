@@ -30,14 +30,14 @@
                 testDb.Database.EnsureCreated();
                 //testDb.Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TestDbContext>());
 
-                testDb.Database.ExecuteSqlCommand("UPDATE ComplexClasses SET Concrete_Id = NULL");
+                testDb.Database.ExecuteSqlCommand("UPDATE ComplexClasses SET ConcreteId = NULL");
                 testDb.Database.ExecuteSqlCommand("DELETE FROM NullableValues");
                 testDb.Database.ExecuteSqlCommand("DELETE FROM NullableContainers");
                 testDb.Database.ExecuteSqlCommand("DELETE FROM EdgeCaseClasses");
                 testDb.Database.ExecuteSqlCommand("DELETE FROM ConcreteClasses");
                 testDb.Database.ExecuteSqlCommand("DELETE FROM ComplexClasses");
 
-                testDb.ComplexCollection.Add(
+                testDb.ComplexClasses.Add(
                     new ComplexClass
                     {
                         Title = "Charles",
@@ -50,7 +50,7 @@
                                     }
                     });
 
-                testDb.ComplexCollection.Add(
+                testDb.ComplexClasses.Add(
                     new ComplexClass
                     {
                         Title = "Andrew",
@@ -68,7 +68,7 @@
                                     }
                     });
 
-                testDb.ComplexCollection.Add(
+                testDb.ComplexClasses.Add(
                     new ComplexClass
                     {
                         Title = "David",
@@ -91,7 +91,7 @@
                                     }
                     });
 
-                testDb.ComplexCollection.Add(
+                testDb.ComplexClasses.Add(
                     new ComplexClass
                     {
                         Title = "Edward",
@@ -116,7 +116,7 @@
                                     }
                     });
 
-                testDb.ComplexCollection.Add(
+                testDb.ComplexClasses.Add(
                     new ComplexClass
                     {
                         Title = "Boris",
@@ -146,7 +146,7 @@
                 testDb.SaveChanges();
 
                 collection =
-                    testDb.ComplexCollection.Select(
+                    testDb.ComplexClasses.Select(
                         o =>
                         new ComplexClassDto
                         {

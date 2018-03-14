@@ -1,6 +1,7 @@
 ﻿namespace LinqToQueryString.Tests
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class ComplexClass
     {

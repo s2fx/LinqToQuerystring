@@ -29,25 +29,25 @@
 
             testDb = new TestDbContext();
 
-            testDb.Database.ExecuteSqlCommand("UPDATE ComplexClasses SET Concrete_Id = NULL");
+            testDb.Database.ExecuteSqlCommand("UPDATE ComplexClasses SET ConcreteId = NULL");
             testDb.Database.ExecuteSqlCommand("DELETE FROM EdgeCaseClasses");
             testDb.Database.ExecuteSqlCommand("DELETE FROM ConcreteClasses");
             testDb.Database.ExecuteSqlCommand("DELETE FROM ComplexClasses");
-            testDb.Database.ExecuteSqlCommand("DELETE FROM NullableClasses");
+            testDb.Database.ExecuteSqlCommand("DELETE FROM NullableValues");
 
-            testDb.ComplexCollection.Add(new ComplexClass { Title = "Charles", Concrete = InstanceBuilders.BuildConcrete("Apple", 5, new DateTime(2005, 01, 01), true) });
-            testDb.ComplexCollection.Add(new ComplexClass { Title = "Andrew", Concrete = InstanceBuilders.BuildConcrete("Custard", 3, new DateTime(2007, 01, 01), true) });
-            testDb.ComplexCollection.Add(new ComplexClass { Title = "David", Concrete = InstanceBuilders.BuildConcrete("Banana", 2, new DateTime(2003, 01, 01), false) });
-            testDb.ComplexCollection.Add(new ComplexClass { Title = "Edward", Concrete = InstanceBuilders.BuildConcrete("Eggs", 1, new DateTime(2000, 01, 01), true) });
-            testDb.ComplexCollection.Add(new ComplexClass { Title = "Boris", Concrete = InstanceBuilders.BuildConcrete("Dogfood", 4, new DateTime(2009, 01, 01), false) });
+            testDb.ComplexClasses.Add(new ComplexClass { Title = "Charles", Concrete = InstanceBuilders.BuildConcrete("Apple", 5, new DateTime(2005, 01, 01), true) });
+            testDb.ComplexClasses.Add(new ComplexClass { Title = "Andrew", Concrete = InstanceBuilders.BuildConcrete("Custard", 3, new DateTime(2007, 01, 01), true) });
+            testDb.ComplexClasses.Add(new ComplexClass { Title = "David", Concrete = InstanceBuilders.BuildConcrete("Banana", 2, new DateTime(2003, 01, 01), false) });
+            testDb.ComplexClasses.Add(new ComplexClass { Title = "Edward", Concrete = InstanceBuilders.BuildConcrete("Eggs", 1, new DateTime(2000, 01, 01), true) });
+            testDb.ComplexClasses.Add(new ComplexClass { Title = "Boris", Concrete = InstanceBuilders.BuildConcrete("Dogfood", 4, new DateTime(2009, 01, 01), false) });
 
-            testDb.NullableCollection.Add(InstanceBuilders.BuildNull());
-            testDb.NullableCollection.Add(InstanceBuilders.BuildNull(1, new DateTime(2002, 01, 01), true, 10000000000, 111.111, 111.111f, 0x00, guidArray[0]));
+            testDb.NullableValues.Add(InstanceBuilders.BuildNull());
+            testDb.NullableValues.Add(InstanceBuilders.BuildNull(1, new DateTime(2002, 01, 01), true, 10000000000, 111.111, 111.111f, 0x00, guidArray[0]));
 
             testDb.SaveChanges();
 
-            concreteCollection = testDb.ConcreteCollection.ToList();
-            nullableCollection = testDb.NullableCollection.ToList();
+            concreteCollection = testDb.ConcreteClasses.ToList();
+            nullableCollection = testDb.NullableValues.ToList();
 
             testDb = new TestDbContext();
         };
@@ -59,7 +59,7 @@
     {
         private Because of =
             () =>
-            result = testDb.ConcreteCollection.LinqToQuerystring<ConcreteClass, IQueryable<Dictionary<string, object>>>("?$select=Name").ToList();
+            result = testDb.ConcreteClasses.LinqToQuerystring<ConcreteClass, IQueryable<Dictionary<string, object>>>("?$select=Name").ToList();
 
         private It should_project_the_name_properties_into_the_dictionary =
             () => result.ShouldEachConformTo(r => r.ContainsKey("Name"));
@@ -84,7 +84,7 @@
     {
         private Because of =
             () =>
-            result = testDb.ConcreteCollection.LinqToQuerystring<ConcreteClass, IQueryable<Dictionary<string, object>>>("?$select=Age").ToList();
+            result = testDb.ConcreteClasses.LinqToQuerystring<ConcreteClass, IQueryable<Dictionary<string, object>>>("?$select=Age").ToList();
 
         private It should_project_the_name_properties_into_the_dictionary =
             () => result.ShouldEachConformTo(
@@ -110,7 +110,7 @@
     {
         private Because of =
             () =>
-            result = testDb.ConcreteCollection.LinqToQuerystring<ConcreteClass, IQueryable<Dictionary<string, object>>>("?$select=Date").ToList();
+            result = testDb.ConcreteClasses.LinqToQuerystring<ConcreteClass, IQueryable<Dictionary<string, object>>>("?$select=Date").ToList();
 
         private It should_project_the_name_properties_into_the_dictionary =
             () => result.ShouldEachConformTo(
@@ -136,7 +136,7 @@
     {
         private Because of =
             () =>
-            result = testDb.ConcreteCollection.LinqToQuerystring<ConcreteClass, IQueryable<Dictionary<string, object>>>("?$select=Complete").ToList();
+            result = testDb.ConcreteClasses.LinqToQuerystring<ConcreteClass, IQueryable<Dictionary<string, object>>>("?$select=Complete").ToList();
 
         private It should_project_the_name_properties_into_the_dictionary =
             () => result.ShouldEachConformTo(
@@ -162,7 +162,7 @@
     {
         private Because of =
             () =>
-            result = testDb.ConcreteCollection.LinqToQuerystring<ConcreteClass, IQueryable<Dictionary<string, object>>>("?$select=Name,Age").ToList();
+            result = testDb.ConcreteClasses.LinqToQuerystring<ConcreteClass, IQueryable<Dictionary<string, object>>>("?$select=Name,Age").ToList();
 
         private It should_project_the_name_and_age_properties_into_the_dictionary =
             () => result.ShouldEachConformTo(
@@ -198,7 +198,7 @@
     {
         private Because of =
             () =>
-            result = testDb.NullableCollection.LinqToQuerystring<NullableClass, IQueryable<Dictionary<string, object>>>("?$select=Age").ToList();
+            result = testDb.NullableValues.LinqToQuerystring<NullableClass, IQueryable<Dictionary<string, object>>>("?$select=Age").ToList();
 
         private It should_project_the_name_properties_into_the_dictionary =
             () => result.ShouldEachConformTo(
