@@ -6,6 +6,9 @@
     <PackageProjectUrl>https://github.com/s2fx/LinqToQuerystring</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/s2fx/LinqToQuerystring/blob/master/LICENSE.txt</PackageLicenseUrl>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <PackageTags>odata;linqtoquerystring;linq</PackageTags>
+    <VersionPrefix>0.7.1</VersionPrefix>
+    <VersionSuffix>beta</VersionSuffix>
     <VersionSuffix Condition="'$(VersionSuffix)'!='' AND '$(BuildNumber)' != ''">$(VersionSuffix)-$(BuildNumber)</VersionSuffix>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
