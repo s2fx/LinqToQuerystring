@@ -17,3 +17,18 @@ test_script:
 
 artifacts:
   - path: 'src\**\*.nupkg'
+
+deploy:
+  - provider: NuGet
+    on:
+      branch: master
+    server: https://www.nuget.org/api/v2/package
+    api_key:
+      secure: oS4aLseE6z0x3V+CYlrHIxutMLiMMt7msq6YmRHn8qK4WMhlduc8n1J98QvbESbU
+    skip_symbols: true
+    artifact: /.*\.nupkg/  
+
+# Build cache
+cache:
+  - tools -> build.cake
+  - packages -> build.cake
