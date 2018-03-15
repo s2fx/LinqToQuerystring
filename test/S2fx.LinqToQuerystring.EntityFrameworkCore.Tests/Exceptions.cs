@@ -9,6 +9,7 @@
     using Machine.Specifications;
     using Microsoft.EntityFrameworkCore;
 
+    /* We have an Id column already, so it won't happen
     public class When_using_skip_on_unordered_data : SqlPagingAndOrdering
     {
         private static Exception ex;
@@ -17,7 +18,9 @@
 
         private It should_throw_an_exception = () => ex.ShouldBeOfExactType<NotSupportedException>();
     }
+    */
 
+    /* Guess what, on EFCore we can do it.
     public class When_trying_to_order_by_complex_types : SqlPagingAndOrdering
     {
         private static Exception ex;
@@ -26,8 +29,9 @@
 
         private It should_throw_an_exception = () => ex.ShouldBeOfExactType<ArgumentException>();
     }
+    */
 
-    /*
+    /* EFCore don't have such exception named EntityCommandCompilationException
     public class When_filtering_on_endswith_function : SqlFunctions
     {
         private static Exception ex;

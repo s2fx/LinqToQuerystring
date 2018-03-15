@@ -1,6 +1,7 @@
 ﻿namespace LinqToQueryString.EntityFrameworkCore.Tests
 {
     using LinqToQueryString.Tests;
+    using Microsoft.Data.Sqlite;
     using Microsoft.EntityFrameworkCore;
 
     public class TestDbContext : DbContext
@@ -25,6 +26,7 @@
             modelBuilder.Entity<ConcreteClass>(entity =>
             {
                 entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).ValueGeneratedOnAdd();
                 entity.Property(x => x.Value).IsRequired();
                 entity.Property(x => x.Cost).IsRequired();
                 entity.Ignore(x => x.StringCollection);
@@ -38,11 +40,12 @@
             modelBuilder.Entity<ComplexClass>(entity =>
             {
                 entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).ValueGeneratedOnAdd();
                 entity.Property(x => x.Title);
                 entity.Ignore(x => x.StringCollection);
                 entity.Ignore(x => x.IntCollection);
-                entity.HasOne(x => x.Concrete);
-                entity.HasMany(x => x.ConcreteCollection);
+                entity.HasOne(x => x.Concrete).WithOne();
+                entity.HasMany(x => x.ConcreteCollection).WithOne();
             });
         }
     }

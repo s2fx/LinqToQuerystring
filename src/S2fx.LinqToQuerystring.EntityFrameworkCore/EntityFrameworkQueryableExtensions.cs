@@ -1,5 +1,4 @@
-﻿
-namespace LinqToQuerystring.EntityFrameworkCore
+﻿namespace LinqToQuerystring.EntityFrameworkCore
 {
     using System;
     using System.Collections.Generic;
