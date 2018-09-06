@@ -1,7 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <PackageId>esdm.LinqToQuerystring.Core</PackageId>
+    <VersionPrefix>0.7.2</VersionPrefix>
+    <Description>A fork of https://github.com/s2fx/LinqToQuerystring</Description>
+    <PackageProjectUrl>https://github.com/exeGesIS-SDM/LinqToQuerystring</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
