@@ -44,7 +44,8 @@
                 entity.Property(x => x.Title);
                 entity.Ignore(x => x.StringCollection);
                 entity.Ignore(x => x.IntCollection);
-                entity.HasOne(x => x.Concrete).WithOne();
+                //entity.HasOne(x => x.Concrete).WithOne();
+                entity.HasOne(x => x.Concrete);
                 entity.HasMany(x => x.ConcreteCollection).WithOne();
             });
         }
